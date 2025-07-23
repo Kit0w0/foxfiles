@@ -1,6 +1,9 @@
 # foxfiles
 My "minimal" dotfiles for i3wm on Arch Linux, using Polybar, Rofi, and Kitty. There is a script, backconf.sh, that will make backups of your current configs. The other script, applyconf.sh, will apply the new configs. I am very selfish and this is only written for me, sorry! (I am not sorry) These are still unfinished, but the idea of having my own git repository is too shiny to ignore? Rofi and Kitty have minimal changes, but I realllly don't want to claw through Kitty's heavily-documented config ever again soooo
 
+<img width="1919" height="1079" alt="The finished product" src="https://github.com/user-attachments/assets/7feeb0b2-45ef-4d31-b5df-68b1fc56698d" />
+
+
 As for dependancies, I don't really feel like combing through every file to see what is needed (I am very selfish), but I know you at least need: 
 - Envy Code R Nerd Font (or any other nerd font)
 - bc
