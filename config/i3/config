@@ -1,0 +1,167 @@
+set $mod Mod1
+set $mod4
+font pango:monospace 10
+
+exec --no-startup-id dex --autostart --environment i3
+
+# Network Manager
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+# Scratchpads
+for_window [class="discord"] move scratchpad;
+bindsym $mod+g [class="discord"] scratchpad show
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# start a terminal
+bindsym $mod+Return exec kitty
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi
+bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# workspace names
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r; restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
+
+bindsym mod4+j resize shrink height 10 px or 10 ppt
+bindsym mod4+k resize grow height 10 px or 10 ppt
+bindsym mod4+h resize shrink width 10 px or 10 ppt
+bindsym mod4+l resize grow width 10 px or 10 ppt
+bindsym mod4+Down resize shrink height 10 px or 10 ppt 
+bindsym mod4+Up resize grow height 10 px or 10 ppt
+bindsym mod4+Left resize shrink width 10 px or 10 ppt
+bindsym mod4+Right resize grow width 10 px or 10 ppt
+
+exec_always ~/.config/i3/bin/killpolybar.sh
+
+exec_always xclip
+
+bindsym $mod+o exec qutebrowser
+
+# picom transparency
+# exec_always --no-startup-id picom  -b --config ~/.config/picom/picom.conf 
+
+# pywal colors
+set_from_resource $fg i3wm.color1 #f0f0f0
+set_from_resource $bg i3wm.color2 #ad1010
+# class                 border  backgr.  text  indicator  child_border
+client.focused          $bg     $bg      $bg   $fg        #34206b
+client.focused_inactive $bg     $bg      $fg   $bg        $bg
+client.unfocused        $bg     $bg      $fg   $bg        $bg
+client.urgent           $bg     $bg      $fg   $bg        $bg
+client.placeholder      $bg     $bg      $fg   $bg        $bg
+client.background       $bg     $bg      $fg   $bg        $bg
+
+gaps left 3
+gaps right 3
+gaps top 0
+gaps bottom 0
+gaps inner 2
+for_window [class="^.*"] border pixel 3
+exec --no-startup-id qutebrowser
+
+# Function Keys
+bindsym $mod+F1 exec playerctl play-pause
+bindsym $mod+F2 exec playerctl previous
+bindsym $mod+F3 exec playerctl next
+bindsym Print exec  gnome-screenshot -acf ~/Photos/latest_screenshot.png && cat ~/Photos/latest_screenshot.png | xclip -i -selection clipboard -target image/png
+bindsym XF86Favorites exec --no-startup-id ~/.config/i3/bin/swapbar.sh
+bindsym $mod+F11 exec --no-startup-id exec ~/.config/i3/bin/swap-keyboard-ru-us.sh
+bindsym XF86MonBrightnessUp exec ~/.config/i3/bin/brightness-up.sh
+bindsym XF86MonBrightnessDown exec ~/.config/i3/bin/brightness-down.sh
+
+
