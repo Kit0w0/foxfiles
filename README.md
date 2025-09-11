@@ -14,3 +14,5 @@ As for dependancies, I don't really feel like combing through every file to see 
 - ummm you can figure it out?
 
 I use pywal and pywal-polybar, so in order to change most colors, run 'wal -i path/to/wallpaper; wal-polybar'. The included snow.png is the wallpaper you see in the picture. When modifying polybar, only change 'config.template', run 'wal-polybar', and then reload i3!
+
+I am trying to figure out a clean solution into seperating my configs into laptop and desktop files, soo yeah

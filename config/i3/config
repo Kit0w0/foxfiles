@@ -19,7 +19,8 @@ tiling_drag modifier titlebar
 
 # Scratchpads
 for_window [class="discord"] move scratchpad;
-bindsym $mod+g [class="discord"] scratchpad show
+#bindsym $mod+q [class="discord"] scratchpad show
+bindsym $mod+q exec ~/.config/i3/bin/resetdcounter.sh
 
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
@@ -34,27 +35,27 @@ bindsym $mod+Shift+q kill
 bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+l focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+h focus right
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+l move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+h move right
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split
-bindsym $mod+h split h
+bindsym $mod+b split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
@@ -133,13 +134,13 @@ exec_always xclip
 bindsym $mod+o exec qutebrowser
 
 # picom transparency
-# exec_always --no-startup-id picom  -b --config ~/.config/picom/picom.conf 
+exec_always --no-startup-id picom  -b --config ~/.config/picom/picom.conf 
 
 # pywal colors
-set_from_resource $fg i3wm.color1 #f0f0f0
-set_from_resource $bg i3wm.color2 #ad1010
+set_from_resource $fg i3wm.color1 #141414
+set_from_resource $bg i3wm.color2 #823d1b
 # class                 border  backgr.  text  indicator  child_border
-client.focused          $bg     $bg      $bg   $fg        #34206b
+client.focused          $bg     $bg      $bg   $fg        #ce651e
 client.focused_inactive $bg     $bg      $fg   $bg        $bg
 client.unfocused        $bg     $bg      $fg   $bg        $bg
 client.urgent           $bg     $bg      $fg   $bg        $bg
@@ -153,7 +154,7 @@ gaps bottom 0
 gaps inner 2
 for_window [class="^.*"] border pixel 3
 exec --no-startup-id qutebrowser
-
+exec --no-startup-id discord
 # Function Keys
 bindsym $mod+F1 exec playerctl play-pause
 bindsym $mod+F2 exec playerctl previous
